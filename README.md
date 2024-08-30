@@ -1,5 +1,3 @@
-# pwngym
-
 <p align="center">
   <img src="pwngym_welcome.jpg" alt="PwnGym Welcome Banner" width="50%">
 </p>
@@ -10,7 +8,6 @@ PwnGym is a minimalistic library for interfacing foundation models with the comm
 
 ## Features
 
-- **Realistic Environments**: Simulate real-world scenarios using Docker containers.
 - **Flexible Backend**: Choose between local Docker setup or connect to external cyber ranges.
 - **Interactive TTY Interface**: Seamlessly connect AI models to command-line interfaces.
 - **Customizable Configurations**: Easily set up and manage different testing environments.
@@ -24,9 +21,9 @@ PwnGym is a minimalistic library for interfacing foundation models with the comm
    cd pwngym
    ```
 
-2. Install the pwngym package:
+2. Install the pwngym as a local package (be sure to install the top level pwngym folder.):
    ```
-   pip install pwngym
+   pip install -e ./pwngym
    ```
 
 
@@ -48,3 +45,13 @@ def build_terminal_tool(env: pwngym.Env) -> Callable:
 ```
 
 Alternatively, you can drop the @tool decorator and pass the wrapped `env.step()` function to the API endpoint if it supports function calling.
+
+## Environments:
+
+You can use PwnGym to either connect to a remote/privately hosted cyber range, test locally against other docker containers, or a mix of the two. For example, you can replace the `example.ovpn` file with a connection pack from HackTheBox and have your agent work on HTB machines while executing from a local container.
+
+For full details of the Docker environments, check the Docker compose files; you can also feel free to use your own!
+
+## Honeypots:
+
+PwnGym also supports honeypots for countering offensive cyber agents. These rely on prompt injection attacks and deceving the offensive agent into executing defender-specified code, allowing for defenders to gather more information, impede, or defeat the attacker.
