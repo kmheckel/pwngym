@@ -1,7 +1,7 @@
 # pwngym
 
 <p align="center">
-  <img src="pwngym_welcome.jpg" alt="PwnGym Welcome Banner" width="100%">
+  <img src="pwngym_welcome.jpg" alt="PwnGym Welcome Banner" width="50%">
 </p>
 
 # PwnGym
@@ -35,3 +35,16 @@ PwnGym is a minimalistic library for interfacing foundation models with the comm
 PwnGym provides a Python API for interacting with the simulated environments. Simply create a backend and start it to launch a Docker environment, then connect in using an Env object; from there, call step or reset as you please.
 
 The Env.step() method can be built into tools provided to an LLM agent to allow it to interact with the environment.
+
+For example, here is how you could use pwngym as a LangChain tool:
+
+```
+def build_terminal_tool(env: pwngym.Env) -> Callable:
+    @tool
+    def terminal(command: str) -> str:
+        """Execute a Linux terminal command."""
+        return env.step(command)
+    return terminal
+```
+
+Alternatively, you can drop the @tool decorator and pass the wrapped `env.step()` function to the API endpoint if it supports function calling.
